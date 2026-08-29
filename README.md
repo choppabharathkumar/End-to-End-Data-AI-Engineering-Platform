@@ -35,7 +35,33 @@ zepto-data-ai-platform/
 │   └── README.md
 │
 ├── analytics/
+│   ├── outputs/
+│   │   ├── charts/               ← 13 PNG visualisations
+│   │   ├── model_results.csv
+│   │   └── regression_results.txt
+│   ├── models/
+│   │   └── best_pipeline.joblib  ← saved sklearn Pipeline
+│   ├── titanic.csv               ← offline dataset copy
+│   ├── constants.py
+│   ├── eda.py
+│   ├── modeling.py
+│   ├── main.py
+│   ├── requirements.txt
+│   └── README.md
+│
 ├── support_assistant/
+│   ├── docs/                     ← 8 policy .txt files
+│   ├── chroma_db/                ← ChromaDB vector store (generated)
+│   ├── agent.py
+│   ├── api.py
+│   ├── ingest.py
+│   ├── retriever.py
+│   ├── constants.py
+│   ├── test_agent.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── README.md
+│
 ├── .gitignore
 └── README.md
 ```
@@ -75,28 +101,62 @@ design decisions.
 
 ### 2. Analytics
 
-**Status: In Progress**
+Complete analytics pipeline on the Titanic dataset: data profiling,
+missing-value analysis, EDA with 13 charts, a 4-chart data story,
+three classifiers (Logistic Regression, Decision Tree, Random Forest),
+class-imbalance handling (balanced weights + SMOTE), GridSearchCV tuning,
+linear regression for fare prediction, and a saved sklearn Pipeline.
 
-This module will contain:
+#### Technologies
 
-- Titanic dataset cleaning & EDA
-- Feature engineering
-- Classification & regression models
-- Model evaluation (accuracy, F1, ROC)
-- Saved ML pipeline
+- Python · Pandas · NumPy · Matplotlib · Seaborn · scikit-learn · imbalanced-learn · joblib
+
+#### Run
+
+```bash
+# Install (from repo root)
+pip install -r analytics/requirements.txt
+
+# Run
+python analytics/main.py
+```
+
+See [`analytics/README.md`](analytics/README.md) for the full EDA steps,
+ML pipeline description, model comparison table, and output file listing.
 
 ---
 
 ### 3. Support Assistant
 
-**Status: In Progress**
+RAG-based customer support assistant grounded in 8 Zepto policy documents.
+Uses ChromaDB with all-MiniLM-L6-v2 embeddings for semantic retrieval,
+a LangGraph StateGraph (3 nodes + conditional routing) for intent
+classification and answer generation, and a FastAPI endpoint for serving
+queries. Ships with a Dockerfile and 15 automated tests.
 
-This module will contain:
+#### Technologies
 
-- Offline-first RAG system with ChromaDB
-- LangGraph-based retrieval & routing
-- FastAPI REST interface
-- Docker deployment
+- Python · FastAPI · LangGraph · ChromaDB · Pydantic · Docker
+
+#### Run
+
+```bash
+# Install (from repo root)
+pip install -r support_assistant/requirements.txt
+
+# Ingest policy documents into ChromaDB (run once)
+python support_assistant/ingest.py
+
+# Start the API server (mock mode — no API key needed)
+python -m uvicorn support_assistant.api:app --port 7860
+
+# Run tests
+python support_assistant/test_agent.py
+```
+
+See [`support_assistant/README.md`](support_assistant/README.md) for the
+full RAG pipeline architecture, LangGraph graph description, example call
+transcripts, and Docker instructions.
 
 ---
 
@@ -117,10 +177,10 @@ Install dependencies per module:
 # Module 1 — Data Pipeline
 pip install -r data_pipeline/requirements.txt
 
-# Module 2 — Analytics  (once built)
+# Module 2 — Analytics
 pip install -r analytics/requirements.txt
 
-# Module 3 — Support Assistant  (once built)
+# Module 3 — Support Assistant
 pip install -r support_assistant/requirements.txt
 ```
 
@@ -138,7 +198,23 @@ python data_pipeline/main.py
 Outputs are written to `data_pipeline/data/`, `data_pipeline/sql/`,
 `data_pipeline/outputs/`, and `data_pipeline/books.db`.
 
-Analytics and Support Assistant modules will be documented here when complete.
+### Analytics
+
+```bash
+python analytics/main.py
+```
+
+Outputs are written to `analytics/outputs/` (charts, CSV) and
+`analytics/models/` (saved pipeline).
+
+### Support Assistant
+
+```bash
+python support_assistant/ingest.py          # one-time ingestion
+python -m uvicorn support_assistant.api:app --port 7860
+```
+
+API available at `http://localhost:7860/ask`.
 
 ---
 
@@ -154,6 +230,6 @@ Git is managed using a feature branch workflow:
 
 ## Author
 
-**ravitendulkar**
+**choppabharathkumar**
 
 Artificial Intelligence and Machine Learning Capstone Project
