@@ -1,4 +1,4 @@
-# Zepto Data & AI Platform
+# End to End Data AI Engineering Platform
 
 ## Overview
 
