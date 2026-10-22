@@ -1,4 +1,4 @@
-# Support Assistant — Zepto Data & AI Platform (Module 3)
+# Support Assistant — End-to-End Data & AI Engineering Platform (Module 3)
 
 ## Overview
 

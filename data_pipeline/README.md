@@ -1,4 +1,4 @@
-# data_pipeline
+# Data Pipeline — End-to-End Data & AI Engineering Platform
 
 Scrapes book data from [books.toscrape.com](https://books.toscrape.com/) (a free,
 static site built for scraping practice), cleans it with pandas, loads it into a

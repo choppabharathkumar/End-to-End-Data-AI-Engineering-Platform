@@ -1,8 +1,10 @@
-# End to End Data AI Engineering Platform
+# End-to-End Data & AI Engineering Platform
+
+> 📊 **[View all verified project metrics →](PROJECT_METRICS.md)**
 
 ## Overview
 
-Zepto Data & AI Platform is an end-to-end Artificial Intelligence and Machine Learning capstone project. The repository contains three integrated modules that demonstrate the workflow of a real AI/ML engineer — from collecting raw data to building analytics and deploying an AI-powered support assistant.
+End-to-End Data & AI Engineering Platform is an end-to-end Artificial Intelligence and Machine Learning capstone project. The repository contains three integrated modules that demonstrate the workflow of a real AI/ML engineer — from collecting raw data to building analytics and deploying an AI-powered support assistant.
 
 | Module | Status | Marks |
 | ------- | ------ | ----- |
@@ -225,6 +227,35 @@ Git is managed using a feature branch workflow:
 - Feature branch created for each sprint.
 - At least two commits per branch.
 - Merged back into `main` when the sprint is complete.
+
+---
+
+## Key Results
+
+For the complete, evidence-backed metrics with verification status, see **[PROJECT_METRICS.md](PROJECT_METRICS.md)**.
+
+### Data Pipeline
+
+- **69 books** scraped across **3 categories** (Travel, Mystery, Historical Fiction)
+- 2-table normalised SQLite database with PK/FK relationships
+- 6 SQL queries covering all required clauses; SQL JOIN vs Pandas merge **match confirmed**
+
+### Analytics & Machine Learning
+
+| Model | Accuracy | F1 | AUC |
+|---|---|---|---|
+| Logistic Regression | 0.8090 | 0.7344 | 0.8610 |
+| Decision Tree | 0.8090 | 0.7213 | 0.8560 |
+| **Random Forest** | **0.8202** | **0.7576** | **0.8215** |
+
+- Linear Regression fare prediction: R² = 0.3020, MAE = 24.47
+- 13 EDA/ML visualisations, saved sklearn Pipeline (preprocessor + RF)
+
+### RAG Support Assistant
+
+- 8 policy documents → 14 chunks (ChromaDB + all-MiniLM-L6-v2)
+- LangGraph StateGraph with 3 nodes and intent-based conditional routing
+- 15 automated tests (mock mode, no API key required)
 
 ---
 

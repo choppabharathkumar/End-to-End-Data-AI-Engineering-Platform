@@ -1,4 +1,4 @@
-# Analytics Module — Zepto Data & AI Platform
+# Analytics Module — End-to-End Data & AI Engineering Platform
 
 ## Overview
 
